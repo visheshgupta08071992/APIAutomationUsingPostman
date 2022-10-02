@@ -273,3 +273,8 @@ pm.test('Verify CreateEmployee response Schema does not have any additional prop
 });
 
 ```
+
+If there are additional properties within the response then the validation would fail with error **data should NOT have additional properties** . The assertion does not specify what additional properties are present in the response, If there are two additional properties then the error message would be displayed twice, similary if there are n additional properties then the error message would be displayed n times. Please refer below image where two additional properties found in response and we can see the Assertion error twice.
+
+![image](https://user-images.githubusercontent.com/52998083/193455159-12e5ce02-b0e0-4a9e-b3b8-f8e05d99659a.png)
+
