@@ -98,3 +98,178 @@ pm.test("Verify Value of dinner2 is correct", function () {
 });
 
 ```
+
+**4. To Validate Json Schema**
+
+```js
+/*
+Validate complete Json schema, The given test would validate whether all the required attributes are present within the response. 
+It would also validate whether  values of all the attributes are of correct type be it String,Integer,Boolean,Object or an Array
+Validating JSON Schema solves most of the communication problems between provider and consumer of the RESTful API service.
+*/
+
+/*
+We can get the schema of our json by pasting the json here https://www.liquid-technologies.com/online-json-to-schema-converter.
+Ensure to remove attribute "$schema" attribute which is added in schema after converting json into schema
+*/
+
+var schema ={
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "jobs": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "favFoods": {
+      "type": "object",
+      "properties": {
+        "breakfast": {
+          "type": "string"
+        },
+        "lunch": {
+          "type": "string"
+        },
+        "dinner": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "required": [
+        "breakfast",
+        "lunch",
+        "dinner"
+      ]
+    }
+  },
+  "required": [
+    "id",
+    "first_name",
+    "last_name",
+    "email",
+    "jobs",
+    "favFoods"
+  ]
+};
+
+pm.test('Verify CreateEmployee response Schema', function () {
+   pm.response.to.have.jsonSchema(schema);
+});
+
+```
+
+**4. To Validate Json Schema does not have addtional properties**
+
+```js
+
+/*
+Validate Create Employee response schema does not have additional attributes, This validation is important to ensure our API does not send additional
+attributes apart from the ones mentioned in the contract, If Additional attributes are received then the TC would fail. This scenario could have been
+covered within schema validation test but adding it within a separate test to get a clear picture with regards to Test Failure
+
+To validate test for additional properties, we must have additionalProperties Tag set to false within the json schema
+
+To get schema of our json with additionalProperties set as false with below steps -
+
+1.Paste json here https://www.liquid-technologies.com/online-json-to-schema-converter.
+2.Click on Options button and uncheck defaultAdditionalProperties checkbox
+3.Click on generate Schema
+4.Ensure to remove attribute "$schema" attribute which is added in schema after converting json into schema
+*/
+
+var additionalPropertySchema ={
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "integer"
+    },
+    "first_name": {
+      "type": "string"
+    },
+    "last_name": {
+      "type": "string"
+    },
+    "email": {
+      "type": "string"
+    },
+    "jobs": {
+      "type": "array",
+      "items": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "string"
+        }
+      ]
+    },
+    "favFoods": {
+      "type": "object",
+      "properties": {
+        "breakfast": {
+          "type": "string"
+        },
+        "lunch": {
+          "type": "string"
+        },
+        "dinner": {
+          "type": "array",
+          "items": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "string"
+            }
+          ]
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "breakfast",
+        "lunch",
+        "dinner"
+      ]
+    }
+  },
+  "additionalProperties": false,
+  "required": [
+    "id",
+    "first_name",
+    "last_name",
+    "email",
+    "jobs",
+    "favFoods"
+  ]
+};
+
+pm.test('Verify CreateEmployee response Schema does not have any additional properties', function () {
+   pm.response.to.have.jsonSchema(additionalPropertySchema);
+});
+
+```
