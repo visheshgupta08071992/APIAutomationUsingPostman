@@ -278,3 +278,38 @@ If there are additional properties within the response then the validation would
 
 ![image](https://user-images.githubusercontent.com/52998083/193455159-12e5ce02-b0e0-4a9e-b3b8-f8e05d99659a.png)
 
+
+**5. To Validate response is of type array**
+
+```js
+//verify response is of type array
+
+pm.test("Verify Get Employee Details request returns array", function () {
+    pm.expect(jsonData).to.be.an('array');
+});
+
+```
+
+**6. To Validate response is of type object**
+
+```js
+//verify response is of type object
+
+pm.test("Verify Delete Employee Details request returns object", function () {
+    pm.expect(jsonData).to.be.an('object');
+});
+
+```
+
+**7. To Validate response is an empty object**
+
+```js
+//verify response is an empty object
+
+pm.test("Verify Delete Employee Details request returns an empty object", function () {
+    pm.expect(jsonData).to.be.empty;
+});
+
+```
+
+
