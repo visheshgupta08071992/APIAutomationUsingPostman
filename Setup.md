@@ -52,7 +52,7 @@ The APIs automated in the given framework are created using json server. Steps f
 
 ```
 
-4. Run the Json server at location where your db.json file is present using command **json-server --watch response.json** . Watch parameter ensures that the server is started in watch mode which means that it watches for file changes and updates the exposed API accordingly.
+4. Run the Json server at location where your response.json file is present using command **json-server --watch response.json** . Watch parameter ensures that the server is started in watch mode which means that it watches for file changes and updates the exposed API accordingly.
 
 5.The following htttp end points are created by Json Server
 
